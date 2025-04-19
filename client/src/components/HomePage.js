@@ -1,19 +1,40 @@
 // src/components/HomePage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './HomePage.css';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to Student Management System</h1>
-      <nav>
-        <Link to="/students">View Students</Link> |{" "}
-        <Link to="/add-student">Add Student</Link>
-      </nav>
+    <div className="home-container">
+      <div className="content-wrapper">
+        <header className="header">
+          <h1>STUDENT MANAGEMENT SYSTEM</h1>
+          <p className="subtitle">
+            <span className="highlight">TRACK</span> AND <span className="highlight">MANAGE</span> STUDENT RECORDS
+          </p>
+        </header>
 
-      <div style={{ marginTop: '20px' }}>
-        <p><strong>Add Student Form</strong> - Form to input new student data</p>
-        <p><strong>Edit Student Form</strong> - Prefilled form to edit existing student</p>
+        <main className="main-content">
+          <div className="card-container">
+            <Link to="/students" className="feature-card view-card">
+              <div className="card-icon">👨‍🎓</div>
+              <h3>VIEW STUDENTS</h3>
+              <p>Browse all student records</p>
+            </Link>
+
+            <Link to="/add-student" className="feature-card add-card">
+              <div className="card-icon">➕</div>
+              <h3>ADD STUDENT</h3>
+              <p>Create new student records</p>
+            </Link>
+
+            <div className="feature-card manage-card">
+              <div className="card-icon">✏️</div>
+              <h3>MANAGE DATA</h3>
+              <p>Edit existing information</p>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   );
