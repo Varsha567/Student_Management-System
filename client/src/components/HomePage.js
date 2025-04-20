@@ -28,11 +28,11 @@ const HomePage = () => {
               <p>Create new student records</p>
             </Link>
 
-            <div className="feature-card manage-card">
+            <Link to="/manage-students" className="feature-card add-card">
               <div className="card-icon">✏️</div>
               <h3>MANAGE DATA</h3>
               <p>Edit existing information</p>
-            </div>
+            </Link>
           </div>
         </main>
       </div>

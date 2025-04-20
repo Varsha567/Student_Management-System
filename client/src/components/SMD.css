@@ -1,0 +1,86 @@
+/* Reuse variables from HomePage.css */
+:root {
+    --neon-cyan: #0ff0fc;
+    --neon-pink: #ff00ff;
+    --neon-green: #00ff00;
+    --dark-bg: #0a0a1a;
+    --darker-bg: #050510;
+    --card-bg: rgba(15, 15, 35, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+  }
+  
+  .management-container {
+    padding: 2rem;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+  }
+  .list-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--neon-cyan);
+    padding-bottom: 1rem;
+  }
+   
+  .search-box {
+    position: relative;
+    flex-grow: 1;
+    max-width: 400px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    background: var(--darker-bg);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: inherit;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--neon-cyan);
+  }
+  .actions-cell {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .action-button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .edit-button {
+    background: var(--neon-cyan);
+    color: var(--dark-bg);
+  }
+  
+  .edit-button:hover {
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+  
+  .delete-button {
+    background: #ff5555;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background: #ff0000;
+    box-shadow: 0 0 10px #ff5555;
+  }
+  
+  /* Reuse other styles from StudentList.css */
