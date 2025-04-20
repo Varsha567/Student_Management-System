@@ -60,7 +60,7 @@ const StudentList = () => {
           <Link to="/add-student" className="add-button">
             + NEW STUDENT
           </Link>
-          <Link to="/edit-students" className="edit-button">
+          <Link to="/manage-students" className="edit-button">
             MANAGE STUDENTS
           </Link>
         </div>

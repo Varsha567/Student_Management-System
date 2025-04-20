@@ -74,7 +74,7 @@ const StudentForm = () => {
         enrollmentYear: new Date().getFullYear(),
         isActive: true
       });
-      navigate('/manage-students');
+      navigate('/StudentManagementDashboard');
     } catch (error) {
       toast.error('Registration failed', { className: 'cyber-toast error' });
     } finally {

@@ -14,7 +14,7 @@ const EditStudentForm = () => {
     lastName: '',
     email: '',
     dob: '',
-    department: 'cse',
+    department: '',
     enrollmentYear: '',
     isActive: true
   });
