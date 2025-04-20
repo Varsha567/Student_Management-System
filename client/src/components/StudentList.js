@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from '../api';
-import './StudentList.css'; // Reuse your HomePage.css styles
+import { fetchStudents} from '../api';
+import './styles/StudentList.css'; // Reuse your HomePage.css styles
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
@@ -9,9 +9,9 @@ const StudentList = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const fetchStudents = async () => {
+    const loadStudents = async () => {
       try {
-        const response = await axios.get('/students');
+        const response = await fetchStudents('/students');
         setStudents(response.data);
         setLoading(false);
       } catch (error) {
@@ -19,7 +19,7 @@ const StudentList = () => {
         setLoading(false);
       }
     };
-    fetchStudents();
+    loadStudents();
   }, []);
 
   const formatDate = (dateString) => {

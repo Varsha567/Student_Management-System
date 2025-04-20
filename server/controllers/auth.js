@@ -4,7 +4,17 @@ const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res) => {
     try {
+        
+       
         const { username, email, password } = req.body;
+        if (!username || !password || !email) {
+            return res.status(400).json({ error: "All fields required" });
+        }
+        // In your auth controller (backend)
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+        return res.status(400).json({ error: "Email already exists" });
+        }
         const user = new User({ username, email, password });
         await user.save();
         

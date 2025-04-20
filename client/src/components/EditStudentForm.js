@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from '../api';
+import { fetchStudentById, updateStudent, deleteStudent } from '../api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './EditStudentForm.css'; // New CSS file for this component
+import './styles/EditStudentForm.css'; // New CSS file for this component
 
 const EditStudentForm = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const EditStudentForm = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const response = await axios.get(`/students/${id}`);
+        const response = await fetchStudentById(id);
         const dobDate = new Date(response.data.dob);
         const formattedDob = dobDate.toISOString().split('T')[0];
         
@@ -62,8 +62,8 @@ const EditStudentForm = () => {
         ...formData,
         dob: new Date(formData.dob)
       };
+      await updateStudent(id, submissionData); 
       
-      await axios.put(`/students/${id}`, submissionData);
       toast.success('Student updated successfully!');
       navigate('/manage-students');
     } catch (error) {
@@ -75,7 +75,7 @@ const EditStudentForm = () => {
   const handleDelete = async () => {
     if (window.confirm('Delete this student permanently?')) {
       try {
-        await axios.delete(`/students/${id}`);
+        await deleteStudent(id);
         toast.success('Student deleted successfully!');
         navigate('/manage-students');
       } catch (error) {

@@ -1,27 +1,27 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';import HomePage from './components/HomePage';
 import StudentList from './components/StudentList';
 import StudentForm from './components/StudentForm';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import StudentManagementDashboard from './components/StudentManagementDashboard';
 import EditStudentForm from './components/EditStudentForm';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
-    <Router>
-      <ToastContainer />
+    <BrowserRouter>
       <Routes>
-          <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<HomePage />} />
           <Route path="/students" element={<StudentList />} />
           <Route path="/add-student" element={<StudentForm />} />
           <Route path="/manage-students" element={<StudentManagementDashboard/>} />
-          <Route path="/students/:id/edit" element={<EditStudentForm />} />
-
+          <Route path="/edit-student/:id" element={<EditStudentForm />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

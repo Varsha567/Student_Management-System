@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../api';
+import { createStudent } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './StudentForm.css';
+import './styles/StudentForm.css';
 
 const StudentForm = () => {
   const [formData, setFormData] = useState({
@@ -58,10 +58,13 @@ const StudentForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/students', {
+      const studentData = {
         ...formData,
-        dob: new Date(formData.dob)
-      });
+        dob: formData.dob ? new Date(formData.dob).toISOString() : null
+      };
+  
+      // Remove the '/students' from the first parameter
+      await createStudent(studentData);
       toast.success(`Student ${formData.firstName} ${formData.lastName} registered!`, { className: 'cyber-toast' });
       localStorage.removeItem('studentForm');
       setFormData({

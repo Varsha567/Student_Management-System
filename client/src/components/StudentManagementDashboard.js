@@ -1,49 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api';
-import './SMD.css'; // Reusing HomePage/StudentList styles
+import { Link } from 'react-router-dom';
+import { fetchStudents, deleteStudent } from '../api';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './styles/SMD.css';
 
 const StudentManagementDashboard = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
-
+  
+  // Fetch all students when component mounts
   useEffect(() => {
-    const fetchStudents = async () => {
+    const loadStudents = async () => {
       try {
-        const response = await axios.get('/students');
-        setStudents(response.data);
-        setLoading(false);
+        setLoading(true);
+        const response = await fetchStudents(); // No need for '/students' here
+        setStudents(response.data); // Assuming response has { data: [...] }
       } catch (error) {
-        console.error('Error fetching students:', error);
+        console.error('Failed to load students:', error);
+        toast.error('Failed to load student data');
+      } finally {
         setLoading(false);
       }
     };
-    fetchStudents();
+
+    loadStudents();
   }, []);
 
+  // Delete a student
   const handleDelete = async (id) => {
-    if (window.confirm('Delete this student permanently?')) {
-      try {
-        await axios.delete(`/students/${id}`);
-        setStudents(students.filter(student => student._id !== id));
-      } catch (error) {
-        console.error('Delete failed:', error);
-      }
+    if (!window.confirm('Delete this student permanently?')) return;
+    
+    try {
+      await deleteStudent(id); // Just pass the ID, not full URL
+      setStudents(prev => prev.filter(student => student._id !== id));
+      toast.success('Student deleted successfully');
+    } catch (error) {
+      console.error('Delete failed:', error);
+      toast.error('Failed to delete student');
     }
   };
 
+  // Format date for display
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch {
+      return 'Invalid Date';
+    }
   };
 
-  const filteredStudents = students.filter(student =>
-    `${student.firstName} ${student.lastName} ${student.studentId} ${student.department}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
+  // Filter students based on search term
+  const filteredStudents = students.filter(student => {
+    const searchContent = `${student.firstName} ${student.lastName} ${student.studentId} ${student.department}`.toLowerCase();
+    return searchContent.includes(searchTerm.toLowerCase());
+  });
 
   if (loading) {
     return (
@@ -98,7 +114,7 @@ const StudentManagementDashboard = () => {
               </tr>
             ) : (
               filteredStudents.map((student) => (
-                <tr key={student._id} className="student-row">
+                <tr key={student._id}>
                   <td className="monospace">{student.studentId}</td>
                   <td>{student.firstName} {student.lastName}</td>
                   <td>{student.email}</td>
@@ -112,7 +128,7 @@ const StudentManagementDashboard = () => {
                   </td>
                   <td className="actions-cell">
                     <Link 
-                      to={`/students/${student._id}/edit`} 
+                      to={`/edit-student/${student._id}`} 
                       className="action-button edit-button"
                     >
                       EDIT
