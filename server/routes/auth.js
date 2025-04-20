@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth');
 
+console.log('Available methods:', Object.keys(authController));
+// Should show: ['register', 'login', 'logout']
+
 // @route   POST /api/auth/register
 // @desc    Register new user
 router.post('/register', authController.register);
