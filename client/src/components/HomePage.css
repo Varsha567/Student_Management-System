@@ -120,3 +120,11 @@
       grid-template-columns: 1fr;
     }
   }
+  .intro-text {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  

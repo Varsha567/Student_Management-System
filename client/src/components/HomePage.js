@@ -1,14 +1,19 @@
 // src/components/HomePage.js
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
+import React from 'react';
 
 const HomePage = () => {
-  return (
+  
+return (
     <div className="home-container">
       <div className="content-wrapper">
         <header className="header">
-          <h1>STUDENT MANAGEMENT SYSTEM</h1>
+        <h1>
+        STUDENT MANAGEMENT SYSTEM
+           
+          </h1>
+          
           <p className="subtitle">
             <span className="highlight">TRACK</span> AND <span className="highlight">MANAGE</span> STUDENT RECORDS
           </p>
