@@ -19,10 +19,23 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-app.use(cors( {
-  origin: 'http://localhost:3000', // Update with your client's URL
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://student-management-system-yeny.onrender.com'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
+
 app.use(express.json());
 app.use(cookieParser());
 

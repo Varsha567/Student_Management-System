@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const API = axios.create({
-  baseURL: 'http://localhost:8080/api',
-});
 
+const API = axios.create({
+  baseURL: process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8080/api' 
+    : '/api' // Relative path for production
+});
 // Add JWT token to requests
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
