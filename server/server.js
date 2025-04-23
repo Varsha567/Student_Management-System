@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 require('dotenv').config();
 const express = require('express');
 
@@ -32,12 +35,14 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-app.get('/debug-build', (req, res) => {
-  const buildExists = fs.existsSync(path.join(__dirname, '../client/build'));
-  res.json({
-    buildExists,
-    files: buildExists ? 
-      fs.readdirSync(path.join(__dirname, '../client/build')) : []
+// Serve static files from React app
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  // Handle React routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
-});
+}
 
