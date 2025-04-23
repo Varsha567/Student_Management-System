@@ -32,3 +32,12 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+app.get('/debug-build', (req, res) => {
+  const buildExists = fs.existsSync(path.join(__dirname, '../client/build'));
+  res.json({
+    buildExists,
+    files: buildExists ? 
+      fs.readdirSync(path.join(__dirname, '../client/build')) : []
+  });
+});
+
