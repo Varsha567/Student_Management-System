@@ -16,7 +16,8 @@ const StudentManagementDashboard = () => {
       try {
         setLoading(true);
         const response = await fetchStudents(); // No need for '/students' here
-        setStudents(response.data); // Assuming response has { data: [...] }
+        console.log('fetchStudents response →', response);
+        setStudents(response.data.data); // Assuming response has { data: [...] }
       } catch (error) {
         console.error('Failed to load students:', error);
         toast.error('Failed to load student data');

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../api'; // Make sure this is imported from your api.js
+import { register } from '../api';
+import { Link } from 'react-router-dom';
+import './styles/Signup.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +17,16 @@ const Signup = () => {
     e.preventDefault();
     try {
       await register(formData);
-      navigate('/login'); // Redirect to login after successful registration
+      navigate('/Home');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
   };
 
   return (
-    <div className="auth-form">
+    <div className="signup-form">
       <h2>Sign Up</h2>
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className="cyber-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -51,7 +53,7 @@ const Signup = () => {
       </form>
       
       <p>
-        Already have an account? <a href="/login">Log in</a>
+        Already have an account? <Link to="/">Log in</Link>
       </p>
     </div>
   );

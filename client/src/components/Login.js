@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { login } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './styles/Login.css';
 const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -14,7 +15,7 @@ const Login = () => {
     try {
       const { data } = await login(formData);
       localStorage.setItem('token', data.token);
-      navigate('/');
+      navigate('/Home');
     } catch (error) {
       alert(error.response?.data?.message || 'Login failed');
     }

@@ -1,6 +1,7 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';import HomePage from './components/HomePage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
 import StudentList from './components/StudentList';
 import StudentForm from './components/StudentForm';
 import Login from './components/Login';
@@ -13,9 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<HomePage />} />
+        <Route path="/Home" element={<HomePage />} />
           <Route path="/students" element={<StudentList />} />
           <Route path="/add-student" element={<StudentForm />} />
           <Route path="/manage-students" element={<StudentManagementDashboard/>} />

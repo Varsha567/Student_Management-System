@@ -1,0 +1,117 @@
+/* Signup.css */
+
+/* Background and container */
+.signup-form {
+    max-width: 500px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00f7ff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00f7ff;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .signup-form h2 {
+    text-align: center;
+    color: #f72585;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px #f72585;
+  }
+  
+  /* Form styling */
+  .signup-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .signup-form input {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #00f7ff;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 0 5px #00f7ff;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .signup-form input:focus {
+    box-shadow: 0 0 10px #00f7ff;
+  }
+  
+  .signup-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Courier New', monospace;
+  }
+  
+  /* Button styling */
+  .signup-form button {
+    border: none;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: white;
+    background: #1f1f1f;
+    border: 2px solid #00f7ff;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00f7ff;
+    transition: 0.3s;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+  }
+  
+  .signup-form button:hover {
+    background: #00f7ff;
+    color: black;
+    box-shadow: 0 0 20px #00f7ff;
+  }
+  
+  /* Link styling */
+  .signup-form p {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #00f7ff;
+  }
+  
+  .signup-form a {
+    color: #f72585;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+  }
+  
+  .signup-form a:hover {
+    text-shadow: 0 0 5px #f72585;
+  }
+  
+  /* Error message styling */
+  .cyber-error {
+    color: #ff3860;
+    background: rgba(255, 56, 96, 0.1);
+    border: 1px solid #ff3860;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    text-align: center;
+    box-shadow: 0 0 10px #ff3860;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+  }
+  
+  /* Underline effect */
+  .signup-form::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    margin: 1rem auto 0;
+    background: #f72585;
+    box-shadow: 0 0 10px #f72585;
+  }

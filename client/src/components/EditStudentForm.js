@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchStudentById, updateStudent, deleteStudent } from '../api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './styles/EditStudentForm.css'; // New CSS file for this component
+import './styles/EditStudentForm.css';
 
 const EditStudentForm = () => {
   const { id } = useParams();
@@ -18,6 +18,7 @@ const EditStudentForm = () => {
     enrollmentYear: '',
     isActive: true
   });
+  const [loading, setLoading] = useState(true);
 
   const departments = ['cse', 'ece', 'mech', 'civil', 'eee'];
 
@@ -25,22 +26,36 @@ const EditStudentForm = () => {
     const fetchStudent = async () => {
       try {
         const response = await fetchStudentById(id);
-        const dobDate = new Date(response.data.dob);
-        const formattedDob = dobDate.toISOString().split('T')[0];
+        const studentData = response.data.data;
         
+        // Safely handle the date conversion
+        let formattedDob = '';
+        if (studentData.dob) {
+          try {
+            const dobDate = new Date(studentData.dob);
+            if (!isNaN(dobDate.getTime())) {
+              formattedDob = dobDate.toISOString().split('T')[0];
+            }
+          } catch (e) {
+            console.error('Error parsing date:', e);
+          }
+        }
+
         setFormData({
-          studentId: response.data.studentId,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          email: response.data.email,
+          studentId: studentData.studentId || '',
+          firstName: studentData.firstName || '',
+          lastName: studentData.lastName || '',
+          email: studentData.email || '',
           dob: formattedDob,
-          department: response.data.department,
-          enrollmentYear: response.data.enrollmentYear,
-          isActive: response.data.isActive
+          department: studentData.department || '',
+          enrollmentYear: studentData.enrollmentYear || '',
+          isActive: studentData.isActive !== false // default to true if undefined
         });
       } catch (error) {
         toast.error('Failed to fetch student data');
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -60,10 +75,9 @@ const EditStudentForm = () => {
     try {
       const submissionData = {
         ...formData,
-        dob: new Date(formData.dob)
+        dob: formData.dob ? new Date(formData.dob) : null
       };
-      await updateStudent(id, submissionData); 
-      
+      await updateStudent(id, submissionData);
       toast.success('Student updated successfully!');
       navigate('/manage-students');
     } catch (error) {
@@ -84,6 +98,10 @@ const EditStudentForm = () => {
       }
     }
   };
+
+  if (loading) {
+    return <div className="loading">Loading student data...</div>;
+  }
 
   return (
     <div className="edit-form-container">
@@ -149,6 +167,7 @@ const EditStudentForm = () => {
               onChange={handleChange}
               required
             >
+              <option value="">Select Department</option>
               {departments.map(dept => (
                 <option key={dept} value={dept}>{dept.toUpperCase()}</option>
               ))}

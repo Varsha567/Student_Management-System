@@ -12,7 +12,7 @@ const StudentList = () => {
     const loadStudents = async () => {
       try {
         const response = await fetchStudents('/students');
-        setStudents(response.data);
+        setStudents(response.data.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching students:', error);
