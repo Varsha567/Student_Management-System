@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// client/src/api.js
 const API = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8080/api' 
+    : '/api'
 });
 
 // Add JWT token to requests
