@@ -35,6 +35,12 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+console.log('Registered routes:');
+app._router.stack.forEach((r) => {
+  if (r.route?.path) {
+    console.log(`${Object.keys(r.route.methods)[0].toUpperCase()} ${r.route.path}`);
+  }
+});
 // Serve static files from React app
 if (process.env.NODE_ENV === 'production') {
   // Serve static files
@@ -46,3 +52,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.all('/{*any}', (req, res, next) => {})
