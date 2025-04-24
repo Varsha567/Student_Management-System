@@ -1,6 +1,8 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomePage from './components/HomePage';
 import StudentList from './components/StudentList';
 import StudentForm from './components/StudentForm';
@@ -13,6 +15,18 @@ import EditStudentForm from './components/EditStudentForm';
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
