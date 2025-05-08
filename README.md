@@ -1,6 +1,3 @@
-Here’s a **properly formatted `README.md`** file with Markdown styling for better readability and professionalism:
-
----
 
 # 🎓 Student Management System
 
@@ -108,4 +105,4 @@ Let’s make this project better together 💡
 
 ---
 
-Would you like me to add a license section or badges for technologies and deployment?
+
